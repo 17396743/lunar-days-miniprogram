@@ -1,0 +1,183 @@
+.empty {
+  text-align: center;
+  padding: 160rpx 0 60rpx;
+  color: #9A8F85;
+  font-size: 30rpx;
+}
+
+.empty-sub {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #C4BBB2;
+}
+
+.day-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.day-name-row {
+  display: flex;
+  align-items: center;
+}
+
+.day-name {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.near-badge {
+  margin-left: 16rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background: #E67E22;
+  border-radius: 8rpx;
+  padding: 2rpx 12rpx;
+}
+
+.day-date {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #9A8F85;
+}
+
+.day-count {
+  text-align: right;
+}
+
+.count-num {
+  display: block;
+  font-size: 56rpx;
+  font-weight: 700;
+  color: #B03A2E;
+  line-height: 1.1;
+}
+
+.count-num.passed {
+  color: #9A8F85;
+}
+
+.count-label {
+  display: block;
+  font-size: 22rpx;
+  color: #9A8F85;
+}
+
+.tip {
+  text-align: center;
+  color: #C4BBB2;
+  font-size: 22rpx;
+  margin-top: 20rpx;
+}
+
+.backup-row {
+  display: flex;
+  justify-content: center;
+  gap: 32rpx;
+  margin: 32rpx 0 140rpx;
+}
+
+.backup-btn {
+  font-size: 24rpx;
+  color: #9A8F85;
+  border: 1rpx solid #D8D0C8;
+  border-radius: 999rpx;
+  padding: 10rpx 32rpx;
+}
+
+.add-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 60rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: #B03A2E;
+  color: #fff;
+  font-size: 60rpx;
+  line-height: 96rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 24rpx rgba(176, 58, 46, 0.35);
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+.modal {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 32rpx;
+}
+
+.modal-input {
+  background: #F5F2EE;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  margin-bottom: 24rpx;
+}
+
+.modal-picker {
+  background: #F5F2EE;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  margin-bottom: 24rpx;
+}
+
+.modal-picker.placeholder {
+  color: #9A8F85;
+}
+
+.modal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 32rpx;
+}
+
+.modal-btns {
+  display: flex;
+  gap: 24rpx;
+}
+
+.btn {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+
+.btn.cancel {
+  background: #F5F2EE;
+  color: #666;
+}
+
+.btn.confirm {
+  background: #B03A2E;
+  color: #fff;
+}

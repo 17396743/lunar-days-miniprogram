@@ -1,0 +1,36 @@
+<view class="page">
+
+  <!-- 日期卡片 -->
+  <view class="card date-card">
+    <text class="solar">{{solarDate}}</text>
+    <text class="week">{{week}}</text>
+    <view class="divider"></view>
+    <text class="lunar">农历 {{lunarText}}</text>
+    <text class="gz">{{gzText}} · {{constellation}}</text>
+    <view wx:if="{{festival}}" class="festival-badge">{{festival}}</view>
+  </view>
+
+  <!-- 宜忌卡片 -->
+  <view class="card yiji-card">
+    <view class="yiji-row">
+      <view class="tag yi-tag">宜</view>
+      <text class="yiji-text">{{yi}}</text>
+    </view>
+    <view class="yiji-row">
+      <view class="tag ji-tag">忌</view>
+      <text class="yiji-text">{{ji}}</text>
+    </view>
+    <text class="yiji-note">宜忌源自传统黄历算法，仅供生活参考</text>
+  </view>
+
+  <!-- 每日一句卡片 -->
+  <view class="card quote-card">
+    <view class="quote-header">
+      <view class="quote-title">每日一句</view>
+      <view class="shuffle-btn" bindtap="shuffleQuote">换一句</view>
+    </view>
+    <text class="quote-text">{{quote}}</text>
+    <text class="quote-from">—— {{quoteFrom}}</text>
+  </view>
+
+</view>

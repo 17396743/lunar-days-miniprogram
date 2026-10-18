@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/today/today",
+    "pages/days/days"
+  ],
+  "window": {
+    "navigationBarTitleText": "倒数日·黄历",
+    "navigationBarBackgroundColor": "#B03A2E",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F7F3ED"
+  },
+  "tabBar": {
+    "color": "#9A8F85",
+    "selectedColor": "#B03A2E",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      { "pagePath": "pages/today/today", "text": "今日" },
+      { "pagePath": "pages/days/days", "text": "倒数日" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

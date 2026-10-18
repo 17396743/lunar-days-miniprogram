@@ -1,0 +1,73 @@
+<view class="page">
+
+  <!-- 空状态 -->
+  <view wx:if="{{days.length === 0}}" class="empty">
+    <text>还没有倒数日</text>
+    <text class="empty-sub">点击下方按钮，记录第一个重要的日子</text>
+  </view>
+
+  <!-- 列表 -->
+  <view
+    wx:for="{{days}}"
+    wx:key="id"
+    class="card day-item"
+    bindtap="openEdit"
+    bindlongpress="remove"
+    data-id="{{item.id}}"
+  >
+    <view class="day-info">
+      <view class="day-name-row">
+        <text class="day-name">{{item.name}}</text>
+        <text wx:if="{{item.isNear}}" class="near-badge">临近</text>
+      </view>
+      <text class="day-date">{{item.date}}{{item.repeat ? ' · 每年' : ''}}</text>
+    </view>
+    <view class="day-count">
+      <text class="count-num {{item.count < 0 ? 'passed' : ''}}">{{item.count < 0 ? -item.count : item.count}}</text>
+      <text class="count-label">{{item.count > 0 ? '天后' : (item.count === 0 ? '就是今天' : '天前')}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{days.length > 0}}" class="tip">点击编辑 · 长按删除</view>
+
+  <!-- 备份 / 恢复 -->
+  <view class="backup-row">
+    <view class="backup-btn" bindtap="backup">备份数据</view>
+    <view class="backup-btn" bindtap="restore">恢复数据</view>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="openAdd">+</view>
+
+  <!-- 添加/编辑弹层 -->
+  <view wx:if="{{showAdd}}" class="mask" bindtap="closeAdd">
+    <view class="modal" catchtap="noop">
+      <view class="modal-title">{{editingId ? '编辑日子' : '添加日子'}}</view>
+
+      <input
+        class="modal-input"
+        placeholder="名称，如：妈妈生日"
+        value="{{newName}}"
+        bindinput="onNameInput"
+        maxlength="20"
+      />
+
+      <picker mode="date" value="{{newDate}}" bindchange="onDateChange">
+        <view class="modal-picker {{newDate ? '' : 'placeholder'}}">
+          {{newDate || '选择日期'}}
+        </view>
+      </picker>
+
+      <view class="modal-row">
+        <text>每年重复（生日/纪念日）</text>
+        <switch checked="{{repeat}}" bindchange="onRepeatChange" color="#B03A2E" />
+      </view>
+
+      <view class="modal-btns">
+        <view class="btn cancel" bindtap="closeAdd">取消</view>
+        <view class="btn confirm" bindtap="save">保存</view>
+      </view>
+    </view>
+  </view>
+
+</view>

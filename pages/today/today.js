@@ -1,5 +1,6 @@
 const lunar = require('../../utils/lunar.js');
 const quotes = require('../../utils/quotes.js');
+const history = require('../../utils/history.js');
 
 const WEEKS = ['日', '一', '二', '三', '四', '五', '六'];
 
@@ -30,7 +31,9 @@ Page({
     ji: '',
     quote: '',
     quoteFrom: '',
-    quoteIndex: 0
+    quoteIndex: 0,
+    historyEvents: [],
+    todayReminders: []
   },
 
   onShow() {
@@ -51,6 +54,14 @@ Page({
     const l = lunar.solar2lunar(y, m, d);
     const festival = lunar.getFestival(y, m, d, l);
 
+    // 历史上的今天：时间统一补全为「年月日」格式
+    const historyEvents = (history[`${m}-${d}`] || []).map(ev =>
+      ev.replace(/^(\d{4})年/, `$1年${m}月${d}日`)
+    );
+
+    // 倒数日到期提醒：今天到期的日子
+    const todayReminders = this.getTodayReminders();
+
     // 当年第几天，作为默认每日一句的索引
     const dayOfYear = Math.floor((now - new Date(y, 0, 0)) / 86400000);
     const quoteIndex = dayOfYear % quotes.length;
@@ -67,8 +78,28 @@ Page({
       ji: l ? l.ji : '',
       quote: q.text,
       quoteFrom: q.from,
-      quoteIndex
+      quoteIndex,
+      historyEvents,
+      todayReminders
     });
+  },
+
+  // 找出今天到期的倒数日（与 days 页同一套算法）
+  getTodayReminders() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const list = wx.getStorageSync('days') || [];
+    return list
+      .filter(item => {
+        const target = new Date(item.date.replace(/-/g, '/'));
+        target.setHours(0, 0, 0, 0);
+        if (item.repeat) {
+          target.setFullYear(today.getFullYear());
+          if (target < today) target.setFullYear(today.getFullYear() + 1);
+        }
+        return target.getTime() === today.getTime();
+      })
+      .map(item => item.name);
   },
 
   // 换一句：随机换一条（避免与当前重复）

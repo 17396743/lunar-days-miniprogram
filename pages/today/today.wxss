@@ -109,6 +109,34 @@
   padding: 6rpx 24rpx;
 }
 
+.history-item {
+  font-size: 27rpx;
+  line-height: 1.9;
+  padding-left: 20rpx;
+  border-left: 4rpx solid #E8E0D8;
+  margin-bottom: 12rpx;
+  color: #5A544E;
+}
+
+.history-empty {
+  font-size: 26rpx;
+  color: #C4BBB2;
+}
+
+.reminder-banner {
+  margin: 24rpx 24rpx 0;
+  padding: 24rpx 32rpx;
+  background: linear-gradient(135deg, #B03A2E, #D35400);
+  color: #fff;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.reminder-name {
+  font-weight: 600;
+}
+
 .quote-text {
   display: block;
   font-size: 32rpx;

@@ -17,13 +17,15 @@
   >
     <view class="day-info">
       <view class="day-name-row">
+        <view class="color-dot" style="background: {{item.color || '#B03A2E'}}"></view>
         <text class="day-name">{{item.name}}</text>
+        <text wx:if="{{item.pinned}}" class="pin-badge">置顶</text>
         <text wx:if="{{item.isNear}}" class="near-badge">临近</text>
       </view>
       <text class="day-date">{{item.date}}{{item.repeat ? ' · 每年' : ''}}</text>
     </view>
     <view class="day-count">
-      <text class="count-num {{item.count < 0 ? 'passed' : ''}}">{{item.count < 0 ? -item.count : item.count}}</text>
+      <text class="count-num {{item.count < 0 ? 'passed' : ''}}" style="color: {{item.count < 0 ? '#9A8F85' : (item.color || '#B03A2E')}}">{{item.count < 0 ? -item.count : item.count}}</text>
       <text class="count-label">{{item.count > 0 ? '天后' : (item.count === 0 ? '就是今天' : '天前')}}</text>
     </view>
   </view>
@@ -61,6 +63,25 @@
       <view class="modal-row">
         <text>每年重复（生日/纪念日）</text>
         <switch checked="{{repeat}}" bindchange="onRepeatChange" color="#B03A2E" />
+      </view>
+
+      <view class="modal-row">
+        <text>置顶</text>
+        <switch checked="{{pinned}}" bindchange="onPinnedChange" color="#B03A2E" />
+      </view>
+
+      <view class="modal-row color-row">
+        <text>颜色</text>
+        <view class="color-options">
+          <view
+            wx:for="{{colorOptions}}"
+            wx:key="*this"
+            class="color-opt {{color === item ? 'active' : ''}}"
+            style="background: {{item}}"
+            data-color="{{item}}"
+            bindtap="onColorSelect"
+          ></view>
+        </view>
       </view>
 
       <view class="modal-btns">

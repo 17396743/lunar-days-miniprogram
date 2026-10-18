@@ -1,3 +1,5 @@
+const COLOR_OPTIONS = ['#B03A2E', '#E67E22', '#2980B9', '#27AE60', '#8E44AD'];
+
 Page({
   data: {
     days: [],
@@ -5,7 +7,10 @@ Page({
     editingId: null,
     newName: '',
     newDate: '',
-    repeat: true
+    repeat: true,
+    pinned: false,
+    color: COLOR_OPTIONS[0],
+    colorOptions: COLOR_OPTIONS
   },
 
   onShow() {
@@ -19,7 +24,11 @@ Page({
         const count = this.calcDays(item.date, item.repeat);
         return { ...item, count, isNear: count >= 0 && count <= 7 };
       })
-      .sort((a, b) => a.count - b.count);
+      // 置顶在前，其余按天数升序
+      .sort((a, b) => {
+        if (!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1;
+        return a.count - b.count;
+      });
     this.setData({ days });
   },
 
@@ -37,7 +46,11 @@ Page({
   },
 
   openAdd() {
-    this.setData({ showAdd: true, editingId: null, newName: '', newDate: '', repeat: true });
+    this.setData({
+      showAdd: true, editingId: null,
+      newName: '', newDate: '', repeat: true,
+      pinned: false, color: COLOR_OPTIONS[0]
+    });
   },
 
   // 点击条目：编辑
@@ -50,7 +63,9 @@ Page({
       editingId: id,
       newName: item.name,
       newDate: item.date,
-      repeat: item.repeat
+      repeat: item.repeat,
+      pinned: !!item.pinned,
+      color: item.color || COLOR_OPTIONS[0]
     });
   },
 
@@ -73,8 +88,16 @@ Page({
     this.setData({ repeat: e.detail.value });
   },
 
+  onPinnedChange(e) {
+    this.setData({ pinned: e.detail.value });
+  },
+
+  onColorSelect(e) {
+    this.setData({ color: e.currentTarget.dataset.color });
+  },
+
   save() {
-    const { newName, newDate, repeat, editingId } = this.data;
+    const { newName, newDate, repeat, pinned, color, editingId } = this.data;
     if (!newName.trim()) {
       wx.showToast({ title: '请输入名称', icon: 'none' });
       return;
@@ -84,14 +107,12 @@ Page({
       return;
     }
     const list = wx.getStorageSync('days') || [];
+    const payload = { name: newName.trim(), date: newDate, repeat, pinned, color };
     if (editingId) {
-      // 编辑已有条目
       const idx = list.findIndex(it => it.id === editingId);
-      if (idx >= 0) {
-        list[idx] = { ...list[idx], name: newName.trim(), date: newDate, repeat };
-      }
+      if (idx >= 0) list[idx] = { ...list[idx], ...payload };
     } else {
-      list.push({ id: Date.now(), name: newName.trim(), date: newDate, repeat });
+      list.push({ id: Date.now(), ...payload });
     }
     wx.setStorageSync('days', list);
     this.setData({ showAdd: false, editingId: null });
@@ -156,7 +177,9 @@ Page({
           id: Date.now() + i,
           name: String(it.name).slice(0, 20),
           date: it.date,
-          repeat: !!it.repeat
+          repeat: !!it.repeat,
+          pinned: !!it.pinned,
+          color: COLOR_OPTIONS.includes(it.color) ? it.color : COLOR_OPTIONS[0]
         }));
         wx.setStorageSync('days', clean);
         this.load();

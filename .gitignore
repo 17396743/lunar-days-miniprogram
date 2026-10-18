@@ -12,3 +12,18 @@ $RECYCLE.BIN/
 
 # Node.js
 node_modules/
+
+# 微信开发者工具（含个人私有配置，AppID 等）
+project.private.config.json
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+
+# 构建产物与日志
+dist/
+*.log
+
+# 本地工作区数据
+.workbuddy/

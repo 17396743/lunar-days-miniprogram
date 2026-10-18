@@ -1,5 +1,12 @@
 <view class="page">
 
+  <!-- 倒数日到期提醒 -->
+  <view wx:if="{{todayReminders.length > 0}}" class="reminder-banner">
+    <text>🎉 今天就是</text>
+    <text wx:for="{{todayReminders}}" wx:key="*this" class="reminder-name">「{{item}}」</text>
+    <text>，记得庆祝一下！</text>
+  </view>
+
   <!-- 日期卡片 -->
   <view class="card date-card">
     <text class="solar">{{solarDate}}</text>
@@ -31,6 +38,13 @@
     </view>
     <text class="quote-text">{{quote}}</text>
     <text class="quote-from">—— {{quoteFrom}}</text>
+  </view>
+
+  <!-- 历史上的今天 -->
+  <view class="card history-card">
+    <view class="quote-title">历史上的今天</view>
+    <view wx:for="{{historyEvents}}" wx:key="index" class="history-item">{{item}}</view>
+    <view wx:if="{{historyEvents.length === 0}}" class="history-empty">今天暂无历史事件记录</view>
   </view>
 
 </view>

@@ -29,6 +29,23 @@
   font-weight: 600;
 }
 
+.color-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.pin-badge {
+  margin-left: 16rpx;
+  font-size: 20rpx;
+  color: #B03A2E;
+  border: 1rpx solid #B03A2E;
+  border-radius: 8rpx;
+  padding: 2rpx 12rpx;
+}
+
 .near-badge {
   margin-left: 16rpx;
   font-size: 20rpx;
@@ -36,6 +53,23 @@
   background: #E67E22;
   border-radius: 8rpx;
   padding: 2rpx 12rpx;
+}
+
+.color-options {
+  display: flex;
+  gap: 20rpx;
+}
+
+.color-opt {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  border: 4rpx solid transparent;
+  box-sizing: border-box;
+}
+
+.color-opt.active {
+  border-color: #33312E;
 }
 
 .day-date {
